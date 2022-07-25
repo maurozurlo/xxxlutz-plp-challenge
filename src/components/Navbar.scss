@@ -1,0 +1,21 @@
+nav.navbar {
+  background-color: var(--background);
+  width: 100%;
+  border-bottom: 1px solid var(--border);
+  height: 60px;
+  padding: 0.5em;
+  .container {
+    width: 100%;
+    max-width: 890px;
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    .logo {
+      img {
+        max-width: 160px;
+      }
+    }
+  }
+}
