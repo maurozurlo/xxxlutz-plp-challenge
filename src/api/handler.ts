@@ -26,12 +26,12 @@ export async function queryAPI(
   }
 }
 
-function queryData(res: Product[], query: string) {
+export function queryData(res: Product[], query: string) {
   const regEx = new RegExp(query, "gi");
   return res.filter((product: Product) => regEx.test(product.name));
 }
 
-function sortData(res: Product[], sort: Sort) {
+export function sortData(res: Product[], sort: Sort) {
   const getPrice = (product: Product) =>
     product.eyecatcher === "sale" ? product.priceSale : product.price;
 

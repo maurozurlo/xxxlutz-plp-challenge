@@ -37,7 +37,7 @@ export default function Navbar() {
                 X
               </button>
             )}
-            <button className="btn primary" type="submit">
+            <button className="btn primary" type="submit" data-testid="submit-btn">
               <SearchIcon />
             </button>
           </form>

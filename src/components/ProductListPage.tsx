@@ -51,6 +51,7 @@ export default function ProductListPage() {
           <select
             name="sort"
             defaultValue={sort}
+            data-testid="select-sort"
             disabled={isLoading || hasErrors}
             onChange={(ev) => setSort(ev.target.value as unknown as Sort)}
           >

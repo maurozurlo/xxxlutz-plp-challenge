@@ -9,7 +9,7 @@ import { Product } from "../types/Products";
 import { queryAPI } from "../api/handler";
 import { Sort } from "../types/Products";
 
-type IProductListContext = {
+export type IProductListContext = {
   isLoading: boolean;
   hasErrors: boolean;
   products: Product[];

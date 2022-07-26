@@ -1,10 +1,11 @@
 import "./ProductCard.scss";
+import {memo} from 'react'
 import { useInView } from "react-intersection-observer";
 import { Product } from "../types/Products";
 import { FormatCurrency } from "../utils";
 import { useProductListContext } from "../context/ProductList";
 
-export default function ProductCard({
+function ProductCard({
   brand,
   eyecatcher,
   image,
@@ -60,3 +61,5 @@ export default function ProductCard({
     </div>
   );
 }
+
+export default memo(ProductCard)
