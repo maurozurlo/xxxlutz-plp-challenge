@@ -1,4 +1,4 @@
-import React, { useState, FormEvent } from "react";
+import { useState, FormEvent } from "react";
 import { useProductListContext } from "../context/ProductList";
 import "./Navbar.scss";
 import Logo from "../assets/logo.jpg";
@@ -33,6 +33,7 @@ export default function Navbar() {
                 className="btn clear"
                 type="button"
                 onClick={() => setQuery("")}
+                data-testid="clear-btn"
               >
                 X
               </button>

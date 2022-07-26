@@ -19,4 +19,18 @@ describe("Navbar component", () => {
     fireEvent.click(searchBtn);
     expect(ProductListContentData.setSearchValue).toBeCalledWith("Smith");
   });
+
+  it("should not display a clear button if search query is blank", () => {
+    setup();
+    expect(screen.queryByTestId("clear-btn")).toBeNull();
+  });
+
+  it("should display a clear button after a search query", () => {
+    setup();
+    const searchInput = screen.getByRole("searchbox");
+    fireEvent.change(searchInput, { target: { value: "Smith" } });
+
+    const clearBtn = screen.getByTestId("clear-btn");
+    expect(clearBtn).toBeInTheDocument();
+  });
 });
