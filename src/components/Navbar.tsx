@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState, FormEvent } from "react";
 import { useProductListContext } from "../context/ProductList";
 import "./Navbar.scss";
 import Logo from "../assets/logo.jpg";
-import {ReactComponent as SearchIcon} from "../assets/search-icon.svg"
+import { ReactComponent as SearchIcon } from "../assets/search-icon.svg";
 
 export default function Navbar() {
   const { searchValue, setSearchValue } = useProductListContext();
+  const [query, setQuery] = useState(searchValue);
+
+  const sendFormData = (form: FormEvent<HTMLFormElement>) => {
+    form.preventDefault();
+    setSearchValue(query);
+  };
 
   return (
     <nav className="navbar">
@@ -14,14 +20,27 @@ export default function Navbar() {
           <img src={Logo} alt="XXXLutz" />
         </div>
         <div className="search-container">
-          <input
-            type="search"
-            name="search"
-            value={searchValue}
-            placeholder="Search..."
-            onChange={(ev) => setSearchValue(ev.target.value)}
-          />
-          <button className="btn"><SearchIcon /></button>
+          <form onSubmit={(e: FormEvent<HTMLFormElement>) => sendFormData(e)}>
+            <input
+              type="search"
+              name="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search..."
+            />
+            {query !== "" && (
+              <button
+                className="btn clear"
+                type="button"
+                onClick={() => setQuery("")}
+              >
+                X
+              </button>
+            )}
+            <button className="btn primary" type="submit">
+              <SearchIcon />
+            </button>
+          </form>
         </div>
       </div>
     </nav>

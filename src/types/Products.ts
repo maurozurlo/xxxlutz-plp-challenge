@@ -9,4 +9,4 @@ export interface Product {
   url: string;
 }
 
-export type Sort = "price" | "name" | "eyecatcher" | "none"
+export type Sort = "low-price" | "high-price" | "name" | "eyecatcher" | "none"

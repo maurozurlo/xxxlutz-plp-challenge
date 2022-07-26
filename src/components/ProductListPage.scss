@@ -27,6 +27,35 @@
     }
   }
 
+  .info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary-text);
+    gap: $padding-large;
+
+    .spinner {
+      border: 4px solid var(--border);
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border-left-color: var(--primary-brand);
+      animation: spin 1s ease infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+  }
+
   .grid{
     display: grid;
     width: 100%;

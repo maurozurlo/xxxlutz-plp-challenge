@@ -27,8 +27,17 @@
     width: 100%;
     display: flex;
     align-items: center;
-    min-height: 150px;
+    aspect-ratio: 1 / 1;
     box-sizing: border-box;
+    animation: skeleton-ui 1.6s infinite linear;
+    @keyframes skeleton-ui {
+      0% {
+        background-position: -32px;
+      }
+      40%, 100% {
+        background-position: 208px;
+      }
+    }
 
     .eyecatcher {
       position: absolute;
