@@ -8,3 +8,5 @@ export interface Product {
   priceSale: number;
   url: string;
 }
+
+export type Sort = "price" | "name" | "eyecatcher" | "none"

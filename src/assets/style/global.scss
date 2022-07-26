@@ -1,0 +1,43 @@
+:root {
+  --primary-brand: #e30014;
+  --background: #ffffff;
+  --primary-text: #10191a;
+  --secondary-text: #c3c3c3;
+  --highlight-text: #ffffff;
+  --border: #d5d5d5; //Reference was #f6f6f6, but I felt it didn't have enough contrast;
+  --highlight: #ffa300;
+  --skeleton-ui-base: #ddd;
+  --skeleton-ui-shine: #e8e8e8;
+}
+/* Screen Size breakpoints are defined as Sass variables since regular css
+doesn't allow the use of variables in media queries */
+$small-screen: 414px;
+$medium-screen: 810px;
+$large-screen: 1600px;
+
+$padding-xsmall: .25em;
+$padding-small: .5em;
+$padding-normal: 1em;
+$padding-large: 1.5em;
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+input,
+select {
+  outline: none;
+  background-image: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  border-radius: 0;
+  background-color: var(--background);
+  border: 1px solid var(--border);
+  padding: 0.5em 1em;
+}

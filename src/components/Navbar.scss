@@ -1,20 +1,55 @@
+@import "../assets/style/global.scss";
+
 nav.navbar {
   background-color: var(--background);
-  width: 100%;
   border-bottom: 1px solid var(--border);
   height: 60px;
-  padding: 0.5em;
+  width: 100%;
+
   .container {
-    width: 100%;
-    max-width: 890px;
     min-height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    max-width: $large-screen;
     margin: 0 auto;
+    box-sizing: border-box;
+    padding: 0 $padding-large;
+
     .logo {
       img {
         max-width: 160px;
+
+        @media screen and (max-width: $small-screen) {
+          max-width: 120px;
+        }
+      }
+    }
+
+    .search-container{
+      position: relative;
+      height: 32px;
+      input{
+        width: 100%;
+        height: 100%;
+      }
+
+      button.btn{
+        position: absolute;
+        background-color: var(--primary-brand);
+        right: 0;
+        top: 0;
+        width: 32px;
+        height: 100%;
+        border: none;
+        cursor: pointer;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        &:hover, &:active{
+          filter: brightness(1.1);
+        }
       }
     }
   }

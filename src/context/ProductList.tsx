@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useEffect, useCallback, useState } from 'react'
 import mockData from '../api/fe.product-list.json'
 import { Product } from '../types/Products';
-
-type Sort = "price" | "name" | "eyecatcher" | null
+import {Sort} from '../types/Products'
 
 type IProductListContext = {
   isLoading: boolean;
@@ -10,7 +9,9 @@ type IProductListContext = {
   setSearchValue: (value: string) => void;
   searchValue: string;
   setSort: (value: Sort) => void;
-  sort: Sort
+  sort: Sort,
+  LOCALE: string;
+  CURRENCY: string;
 };
 
 export const ProductListContext = createContext<IProductListContext>(
@@ -22,7 +23,11 @@ const ProductListContextProvider: React.FC<{children: React.ReactNode}> = ({ chi
   const [isLoading, setIsLoading] = useState(false)
   const [products, setProducts] = useState<Product[]>([])
   const [searchValue, setSearchValue] = useState<string>("")
-  const [sort, setSort] = useState<Sort>(null)
+  const [sort, setSort] = useState<Sort>("none")
+  // The following variables are defined just mocks
+  // They would be provided by the backend in a real life scenario
+  const LOCALE = 'de-DE'
+  const CURRENCY = 'eur'
 
   const fetchProducts = useCallback(
     async (params: {
@@ -56,7 +61,9 @@ const ProductListContextProvider: React.FC<{children: React.ReactNode}> = ({ chi
       setSearchValue,
       searchValue,
       sort,
-      setSort
+      setSort,
+      LOCALE,
+      CURRENCY
     }}
   >
     {children}

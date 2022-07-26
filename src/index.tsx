@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./global.scss";
+import "./assets/style/global.scss";
 import View from "./components/View";
 import ProductListPage from "./components/ProductListPage";
 import reportWebVitals from "./reportWebVitals";
