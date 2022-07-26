@@ -11,6 +11,7 @@ import { Sort } from "../types/Products";
 
 type IProductListContext = {
   isLoading: boolean;
+  hasErrors: boolean;
   products: Product[];
   setSearchValue: (value: string) => void;
   searchValue: string;
@@ -29,20 +30,24 @@ const ProductListContextProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [hasErrors, setHasErrors] = useState(false);
   const [products, setProducts] = useState<Product[]>([]);
   const [searchValue, setSearchValue] = useState<string>("");
   const [sort, setSort] = useState<Sort>("none");
   // The following variables are defined just mocks
   // They would be provided by the backend in a real life scenario
-  const LOCALE = "de-DE";
-  const CURRENCY = "eur";
+  const LOCALE = "sv-SE";
+  const CURRENCY = "sek";
 
   const fetchProducts = useCallback(
     async (query: string, sort: Sort) => {
       setIsLoading(true);
-      //call api fetch(...)
       const result = await queryAPI(query, sort)
-      setProducts(result);
+      if(result.error){
+        setHasErrors(true)
+      }else{
+        setProducts(result.products!);
+      }
       setIsLoading(false);
     },
     []
@@ -60,6 +65,7 @@ const ProductListContextProvider: React.FC<{ children: React.ReactNode }> = ({
     <ProductListContext.Provider
       value={{
         isLoading,
+        hasErrors,
         products,
         setSearchValue,
         searchValue,

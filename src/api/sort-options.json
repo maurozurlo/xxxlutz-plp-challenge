@@ -1,0 +1,22 @@
+[
+  {
+    "id": "none",
+    "label": "None"
+  },
+  {
+    "id": "low-price",
+    "label": "Lowest Price"
+  },
+  {
+    "id": "high-price",
+    "label": "Highest Price"
+  },
+  {
+    "id": "name",
+    "label": "Name"
+  },
+  {
+    "id": "eyecatcher",
+    "label": "Sale"
+  }
+]

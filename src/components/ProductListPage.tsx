@@ -1,34 +1,44 @@
-import React from "react";
-import "./ProductListPage.scss";
-import { Product, Sort } from "../types/Products";
 import ProductCard from "./ProductCard";
+import { Product, Sort } from "../types/Products";
 import { useProductListContext } from "../context/ProductList";
+import SORT_OPTIONS from "../api/sort-options.json";
+import "./ProductListPage.scss";
 
-const SORT_OPTIONS = [
-  {
-    id: "none",
-    label: "None",
-  },
-  {
-    id: "low-price",
-    label: "Lowest Price",
-  },
-  {
-    id: "high-price",
-    label: "Highest Price",
-  },
-  {
-    id: "name",
-    label: "Name",
-  },
-  {
-    id: "eyecatcher",
-    label: "Sale",
-  },
-];
+function ProductGrid({ products }: { products: Product[] }) {
+  return products.length === 0 ? (
+    <div className="info">Sorry, no matches where found for your query.</div>
+  ) : (
+    <div className="grid">
+      {products.map(
+        ({
+          brand,
+          eyecatcher,
+          id,
+          image,
+          name,
+          price,
+          priceSale,
+          url,
+        }: Product) => (
+          <ProductCard
+            key={id}
+            price={price}
+            priceSale={priceSale}
+            image={image}
+            name={name}
+            url={url}
+            brand={brand}
+            eyecatcher={eyecatcher}
+          />
+        )
+      )}
+    </div>
+  );
+}
 
 export default function ProductListPage() {
-  const { isLoading, products, setSort, sort } = useProductListContext();
+  const { isLoading, hasErrors, products, setSort, sort } =
+    useProductListContext();
 
   return (
     <div className="plp">
@@ -41,7 +51,7 @@ export default function ProductListPage() {
           <select
             name="sort"
             defaultValue={sort}
-            disabled={isLoading}
+            disabled={isLoading || hasErrors}
             onChange={(ev) => setSort(ev.target.value as unknown as Sort)}
           >
             {SORT_OPTIONS.map(({ id, label }) => (
@@ -52,39 +62,17 @@ export default function ProductListPage() {
           </select>
         </div>
       </div>
-      {isLoading ? (
+      {hasErrors ? (
+        <div className="info">
+          Sorry, we were unable to perform your request.
+        </div>
+      ) : isLoading ? (
         <div className="info">
           <div className="spinner" />
           <div>Loading results, please wait...</div>
         </div>
-      ) : products.length === 0 ? (
-        <div className="info">Sorry, no matches where found for your query.</div>
       ) : (
-        <div className="grid">
-          {products.map(
-            ({
-              brand,
-              eyecatcher,
-              id,
-              image,
-              name,
-              price,
-              priceSale,
-              url,
-            }: Product) => (
-              <ProductCard
-                key={id}
-                price={price}
-                priceSale={priceSale}
-                image={image}
-                name={name}
-                url={url}
-                brand={brand}
-                eyecatcher={eyecatcher}
-              />
-            )
-          )}
-        </div>
+        <ProductGrid products={products} />
       )}
     </div>
   );

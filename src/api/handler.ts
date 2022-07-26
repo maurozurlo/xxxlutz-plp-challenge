@@ -1,34 +1,39 @@
 import { Product, Sort } from "../types/Products";
-import mockData from "../api/fe.product-list.json";
-
-const delay = (time: number) => new Promise((res) => setTimeout(res, time));
 
 export async function queryAPI(
   query: string,
   sort: Sort
-): Promise<Product[]> {
-  const res = mockData;
-  const isSorted = sort !== 'none'
-  const hasQuery = query !== ''
+): Promise<{ error?: string; products?: Product[] }> {
+  const isSorted = sort !== "none";
+  const hasQuery = query !== "";
 
-  await delay(500);
+  try {
+    const response = await fetch(`https://justcors.com/tl_f9c9ecb/${process.env.REACT_APP_PRODUCT_API || ""}`);
+    if (!response.ok || response.status !== 200)
+      return { error: response.statusText };
 
-  if(!isSorted && !hasQuery) return res;
+    const data = await response.json();
 
-  if(isSorted && !hasQuery) return sortData(res, sort)
+    if (!isSorted && !hasQuery) return { products: data };
 
-  if(!isSorted && hasQuery) return queryData(res, query)
+    if (isSorted && !hasQuery) return { products: sortData(data, sort) };
 
-  return sortData(queryData(res, query), sort);
+    if (!isSorted && hasQuery) return { products: queryData(data, query) };
+
+    return { products: sortData(queryData(data, query), sort) };
+  } catch (err: any) {
+    return { error: err.toString() };
+  }
 }
 
-function queryData(res: Product[], query: string){
-  const regEx = new RegExp(query,'gi')
-  return res.filter((product: Product) => regEx.test(product.name))
+function queryData(res: Product[], query: string) {
+  const regEx = new RegExp(query, "gi");
+  return res.filter((product: Product) => regEx.test(product.name));
 }
 
 function sortData(res: Product[], sort: Sort) {
-  const getPrice = (product: Product) => product.eyecatcher === 'sale' ? product.priceSale : product.price
+  const getPrice = (product: Product) =>
+    product.eyecatcher === "sale" ? product.priceSale : product.price;
 
   switch (sort) {
     case "name":
