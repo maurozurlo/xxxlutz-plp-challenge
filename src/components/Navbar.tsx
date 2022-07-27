@@ -13,6 +13,11 @@ export default function Navbar() {
     setSearchValue(query);
   };
 
+  const resetForm = () => {
+    setQuery("");
+    setSearchValue("");
+  }
+
   return (
     <nav className="navbar">
       <div className="container">
@@ -32,7 +37,7 @@ export default function Navbar() {
               <button
                 className="btn clear"
                 type="button"
-                onClick={() => setQuery("")}
+                onClick={() => resetForm()}
                 data-testid="clear-btn"
               >
                 X

@@ -11,7 +11,6 @@
 
   @media screen and (max-width: $small-screen) {
     width: 100%;
-    max-width: 320px;
     margin: 0 auto;
   }
 
@@ -60,10 +59,6 @@
     img{
       width: 100%;
       height: 100%;
-    }
-
-    @media screen and (max-width: $small-screen) {
-      max-height: 286px;
     }
   }
 

@@ -58,8 +58,7 @@ const ProductListContextProvider: React.FC<{ children: React.ReactNode }> = ({
       searchValue,
       sort
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchValue, sort]);
+  }, [searchValue, sort, fetchProducts]);
 
   return (
     <ProductListContext.Provider
